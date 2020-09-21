@@ -15,9 +15,9 @@ if __name__ == "__main__":
     #print(df.head())
     #print(df.info())
     #print(df.describe())
-    print(df.duplicated().any())
-    print('The percentage of Y class : %.2f' % (df['Loan_Status'].value_counts()[0] / len(df)))
-    print('The percentage of N class : %.2f' % (df['Loan_Status'].value_counts()[1] / len(df)))
+    #print(df.duplicated().any())
+    #print('The percentage of Y class : %.2f' % (df['Loan_Status'].value_counts()[0] / len(df)))
+    #print('The percentage of N class : %.2f' % (df['Loan_Status'].value_counts()[1] / len(df)))
 
     #Izbacujemo id kolonu iz tabele jer nam nije potrebna
     df.drop('Loan_ID', axis=1, inplace=True)
@@ -77,3 +77,28 @@ if __name__ == "__main__":
     #print(df.groupby('Loan_Status').median())
 
     #sto je CoapplicantIncome veci to je veca sansa za odobrenje kredita
+
+
+    #Resavanje problema nultih vrednosti
+    #Podelicemo podatke na kategoricke i numericke
+    kategoricki = []
+    numericki = []
+    for i, c in enumerate(df.dtypes):
+        if c == object:
+            kategoricki.append(df.iloc[:, i])
+        else:
+            numericki.append(df.iloc[:, i])
+
+    kategoricki = pd.DataFrame(kategoricki).transpose()
+    numericki = pd.DataFrame(numericki).transpose()
+    #print(kategoricki.head())
+    #print("  ")
+    #print(numericki.head())
+
+    #Popunjavanje nulltih vrednosti sa najpopularnijim podacima
+    kategoricki = kategoricki.apply(lambda x: x.fillna(x.value_counts().index[0]))
+    #print(kategoricki.isnull().sum().any())
+
+    #Popunjavanje nultih vrednosti vrednostima njihovih prethodnika
+    numericki.fillna(method='bfill', inplace=True)
+    #print(numericki.isnull().sum().any())
