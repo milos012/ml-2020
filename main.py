@@ -1,12 +1,9 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sea
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
-from sklearn.metrics import precision_score, accuracy_score
 from sklearn.model_selection import cross_val_score
 
 import warnings
