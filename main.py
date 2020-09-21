@@ -21,8 +21,8 @@ if __name__ == "__main__":
     #print(df.info())
     #print(df.describe())
     #print(df.duplicated().any())
-    #print('The percentage of Y class : %.2f' % (df['Loan_Status'].value_counts()[0] / len(df)))
-    #print('The percentage of N class : %.2f' % (df['Loan_Status'].value_counts()[1] / len(df)))
+    print('The percentage of Y class : %.2f' % (df['Loan_Status'].value_counts()[0] / len(df)))
+    print('The percentage of N class : %.2f' % (df['Loan_Status'].value_counts()[1] / len(df)))
 
     #Izbacujemo id kolonu iz tabele jer nam nije potrebna
     df.drop('Loan_ID', axis=1, inplace=True)
@@ -116,8 +116,8 @@ if __name__ == "__main__":
     #spajanje podataka
     df = pd.concat([kategoricki, numericki, t], axis=1)
 
-    df.drop('LoanAmount', inplace=True, axis=1)
-    df.drop('Gender', inplace=True,axis=1)
+    #df.drop('LoanAmount', inplace=True, axis=1)
+    #df.drop('Gender', inplace=True,axis=1)
 
     #Treniranje
     X = pd.concat([kategoricki, numericki], axis=1)
